@@ -26,4 +26,6 @@ Follow the instructions below to set up and run the application locally.
 
    ```bash
    git clone https://github.com/your-username/webtoons-api.git
-2. **Run npm i and node index.js ** 
+2. **Install the dependencies and run the Api server**
+ ```bash
+Run npm i and node index.js
