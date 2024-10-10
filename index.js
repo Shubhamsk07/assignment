@@ -1,10 +1,21 @@
 import { PrismaClient } from '@prisma/client';
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
+
 const prisma = new PrismaClient();
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: { error: 'Too many requests, please try again later.' },
+});
+
 const app = express();
 app.use(express.json())
 const secretKey = 'mySecret';
+app.use(limiter);
+
 const authenticateToken = (req, res, next) => {
     const token = req.header('Authorization').split(' ')[1]
     if (!token) {
